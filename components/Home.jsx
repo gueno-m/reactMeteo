@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View} from 'react-native';
+import { StyleSheet, Text, Image, View } from 'react-native';
 import Previsions from './Previsions';
 import soleil from '../assets/soleil.gif';
 
@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
         width: '80%',
         height: 'auto',
         marginTop: 0,
-        borderColor: '#FFFFFF', 
+        borderColor: '#FFFFFF',
         borderWidth: 3,
         padding: 10,
-        alignContent:'center',
+        alignContent: 'center',
     },
 
     image: {
@@ -73,19 +73,26 @@ const styles = StyleSheet.create({
 });
 
 export default function Home() {
+
+    let date = new Date();
+    const week = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+    const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    const day = week[date.getDay()]
+    let fullDate = `${week[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
+
     return (
         <View style={styles.contenu}>
             <View style={styles.localisation}>
                 <Text style={styles.date}>Jeudi 19 Mars</Text>
                 <Text style={styles.ville}>THIAIS</Text>
-                <Text style={styles.heure}>12:30</Text>
+                <Text style={styles.heure}>{fullDate}</Text>
             </View>
             <View style={styles.temps}>
-            <Text style={styles.description}>Ensoleillé</Text>
-            <Image style={styles.image}
-                source={soleil}
-            />
-            <Text style={styles.temperature}>19°C</Text>
+                <Text style={styles.description}>Ensoleillé</Text>
+                <Image style={styles.image}
+                    source={soleil}
+                />
+                <Text style={styles.temperature}>19°C</Text>
             </View>
 
             <Previsions />
