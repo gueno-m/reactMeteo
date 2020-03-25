@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
-import Previsions from './Previsions';
+import { StyleSheet, Text, Image, View, Button } from 'react-native';
 import soleil from '../assets/soleil.gif';
 
 const styles = StyleSheet.create({
@@ -10,6 +9,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-around',
+        backgroundColor: 'salmon',
     },
 
     localisation: {
@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
 
     image: {
         margin: 'auto',
-        marginTop: 0,
-        width: 200,
-        height: 200,
+        marginTop: 2,
+        width: '100%',
+        height: 250,
     },
 
     description: {
@@ -70,22 +70,27 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 50,
     },
+
+    // boutton: {
+    //     margin: 'auto',
+    //     color: 'black',
+    //     fontSize: 100,
+    // },
 });
 
-export default function Home() {
+export default function Home({ navigation }) {
 
     let date = new Date();
     const week = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-    const day = week[date.getDay()]
     let fullDate = `${week[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
 
     return (
         <View style={styles.contenu}>
             <View style={styles.localisation}>
-                <Text style={styles.date}>Jeudi 19 Mars</Text>
+                <Text style={styles.date}>{fullDate}</Text>
                 <Text style={styles.ville}>THIAIS</Text>
-                <Text style={styles.heure}>{fullDate}</Text>
+                <Text style={styles.heure}>15:30</Text>
             </View>
             <View style={styles.temps}>
                 <Text style={styles.description}>Ensoleillé</Text>
@@ -95,7 +100,10 @@ export default function Home() {
                 <Text style={styles.temperature}>19°C</Text>
             </View>
 
-            <Previsions />
+            <Button
+               title="&rarr;"
+               onPress={() => navigation.navigate('Prochains jours')} style={styles.boutton}
+            />
         </View>
     );
 }
