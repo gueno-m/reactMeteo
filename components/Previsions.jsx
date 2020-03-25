@@ -1,15 +1,8 @@
 import React from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, Image, View, Button } from 'react-native';
 
 const styles = StyleSheet.create({
-
-    contenu: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        // justifyContent: 'center',
-        backgroundColor: 'salmon',
-    },
 
     haut: {
         flex: .06,
@@ -89,7 +82,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
     },
 
-    prochainesheures : {
+    prochainesheures: {
         marginRight: 5,
     },
 
@@ -117,16 +110,32 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginTop: -18,
     },
+
+    boutton: {
+        padding: 0,
+        color: 'white',
+        fontSize: 30,
+        marginLeft: 5,
+        // borderColor: '#FFFFFF',
+        // borderWidth: 3,
+    },
 });
 
 export default function Previsions({ navigation }) {
     return (
-        <View style={styles.contenu}>
+        <LinearGradient colors={
+            ['#0093E9', '#80D0C7']
+        }
+            style={
+                {
+                    flex: 1,
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                }
+            } >
             <View style={styles.haut}>
-                <Button
-                    title="&larr;"
-                    onPress={() => navigation.navigate('Accueil')}
-                />
+            <Text style={styles.boutton} onPress={() => navigation.navigate('Accueil')}>&larr;</Text>
 
                 <Text style={styles.titre}>Météo des prochains jours</Text>
             </View>
@@ -135,7 +144,7 @@ export default function Previsions({ navigation }) {
             <List />
             <List />
             <List />
-        </View>
+        </LinearGradient>
     );
 }
 

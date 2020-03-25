@@ -1,16 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, Image, View, Button } from 'react-native';
-import soleil from '../assets/soleil.gif';
+import React, { useState, useEffect } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, Image, View } from 'react-native';
+// import soleil from '../assets/soleil.gif';
 
 const styles = StyleSheet.create({
-
-    contenu: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        backgroundColor: 'salmon',
-    },
 
     localisation: {
         width: 'auto',
@@ -71,14 +64,36 @@ const styles = StyleSheet.create({
         fontSize: 50,
     },
 
-    // boutton: {
-    //     margin: 'auto',
-    //     color: 'black',
-    //     fontSize: 100,
-    // },
+    boutton: {
+        padding: 0,
+        color: 'white',
+        fontSize: 40,
+        // borderColor: '#FFFFFF',
+        // borderWidth: 3,
+    },
 });
 
 export default function Home({ navigation }) {
+
+    const apiKey = '842c20593572a2bedc0d21ab65cfb6bb';
+    const ville = 'Paris';
+
+    const [city, setCity] = useState('');
+    const [desc, setDesc] = useState('');
+    const [icon, setIcon] = useState('');
+    const [temp, setTemp] = useState('');
+
+    useEffect(() => {
+
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ville}&appid=${apiKey}&lang=fr&units=metric`)
+            .then(response => response.json())
+            .then(jsonData => {
+                setCity(jsonData.name)
+                setDesc(jsonData.weather[0].description)
+                setIcon(jsonData.weather[0].icon)
+                setTemp(jsonData.main.temp.toFixed(1))
+            })
+    })
 
     let date = new Date();
     const week = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
@@ -86,24 +101,32 @@ export default function Home({ navigation }) {
     let fullDate = `${week[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
 
     return (
-        <View style={styles.contenu}>
-            <View style={styles.localisation}>
-                <Text style={styles.date}>{fullDate}</Text>
-                <Text style={styles.ville}>THIAIS</Text>
-                <Text style={styles.heure}>15:30</Text>
-            </View>
-            <View style={styles.temps}>
-                <Text style={styles.description}>Ensoleillé</Text>
-                <Image style={styles.image}
-                    source={soleil}
-                />
-                <Text style={styles.temperature}>19°C</Text>
-            </View>
+        <LinearGradient colors={
+            ['#0093E9', '#80D0C7']
+        }
+            style={
+                {
+                    flex: 1,
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                }
+            } >
+                <View style={styles.localisation}>
+                    <Text style={styles.date}>{fullDate}</Text>
+                    <Text style={styles.ville}>{city}</Text>
+                    <Text style={styles.heure}>15:30</Text>
+                </View>
+                <View style={styles.temps}>
+                    <Text style={styles.description}>{desc}</Text>
+                    <Image style={styles.image}
+                        source={{ uri: `http://openweathermap.org/img/wn/${icon}@2x.png` }}
+                    />
+                    <Text style={styles.temperature}>{temp}°C</Text>
+                </View>
 
-            <Button
-               title="&rarr;"
-               onPress={() => navigation.navigate('Prochains jours')} style={styles.boutton}
-            />
-        </View>
+                <Text style={styles.boutton} onPress={() => navigation.navigate('Prochains jours')}>&rarr;</Text>
+
+        </LinearGradient>
     );
 }
