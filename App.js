@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 const navHeaderStyle = {
   borderWidth: 0,
   shadowColor: 'transparent',
-  height: 0
+  height: 0,
 }
 
 export default function App() {
