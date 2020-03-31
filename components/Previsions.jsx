@@ -101,8 +101,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 30,
         marginLeft: 5,
-        // borderColor: '#FFFFFF',
-        // borderWidth: 3,
     },
 });
 
@@ -112,14 +110,12 @@ const ville = 'Thiais';
     export default function Previsions({ navigation }) {
 
     const [city, setCity] = useState('');
-    const [temp, setTemp] = useState('');    
     useEffect(() => {
 
         fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${ville}&appid=${apiKey}&units=metric&lang=fr`)
             .then(response => response.json())
             .then(jsonData => {
                 setCity(jsonData.city.name)
-                setTemp(jsonData.list[2].main.temp)
             })
     })
 
@@ -179,9 +175,9 @@ const List = () => {
             .then(response => response.json())
             .then(jsonData => {
                 setTemp(jsonData.list[10].main.temp.toFixed())
-                setDate(jsonData.list[5].dt_text)
-                setDesc(jsonData.list[5].weather[0].description.charAt(0).toUpperCase() + jsonData.list[5].weather[0].description.slice(1))
-                setIcon(jsonData.list[5].weather[0].icon)
+                setDate(jsonData.list[10].dt_text)
+                setDesc(jsonData.list[7].weather[0].description.charAt(0).toUpperCase() + jsonData.list[5].weather[0].description.slice(1))
+                setIcon(jsonData.list[7].weather[0].icon)
             })
     })
 
@@ -199,62 +195,6 @@ const List = () => {
 
             <Text style={styles.jour}>Demain {"\n"} à 00:00</Text>
             <Text style={styles.degre}>{temp}°C</Text>
-                {/* <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>00h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>{temp}°C</Text>
-                </View>
-                <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>03h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>0°C</Text>
-                </View>
-                <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>06h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>0°C</Text>
-                </View>
-                <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>09h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>0°C</Text>
-                </View>
-                <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>12h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>0°C</Text>
-                </View>
-                <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>15h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>0°C</Text>
-                </View>
-                <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>18h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>0°C</Text>
-                </View>
-                <View style={styles.prochainesheures}>
-                    <Text style={styles.heure}>21h</Text>
-                    <Image style={styles.imagesprochainesheures}
-                        source={require('../assets/soleil.png')}
-                    />
-                    <Text style={styles.degre}>0°C</Text>
-                </View> */}
             </View>
         </View>
     )
