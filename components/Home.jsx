@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
 
 export default function Home({ navigation }) {
 
-    const apiKey = '842c20593572a2bedc0d21ab65cfb6bb';
+    // const apiKey = '842c20593572a2bedc0d21ab65cfb6bb';
+    const apiKey = '093c63d1d6dd2f0f77c6f14d91a19042';
     const ville = 'Thiais';
 
     const [city, setCity] = useState('');
