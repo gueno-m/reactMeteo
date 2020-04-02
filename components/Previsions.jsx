@@ -57,11 +57,12 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'left',
         fontSize: 19,
-        marginTop: 25,
+        marginTop: 20,
     },
 
     date: {
         fontWeight: 'bold',
+        fontSize: 25,
     }, 
 
     image: {
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontSize: 30,
         marginTop: 30,
-        marginLeft: 5,
+        marginLeft: 20,
     },
 
     boutton: {
@@ -180,8 +181,13 @@ const List = (props) => {
         setHeure(g.dt_txt.split(" ")[1]);
         setDesc(g.weather[0].description.charAt(0).toUpperCase() + g.weather[0].description.slice(1))
         setIcon(g.weather[0].icon)
-        setTemp(g.main.temp.toFixed())
+        setTemp(g.main.temp.toFixed(1))
     });
+
+    let jour = new Date(date);
+    const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    let mois = months[jour.getUTCMonth()];
+    let jours = jour.getUTCDate();
 
       return (
         <View style={styles.prochainement}>
@@ -194,7 +200,7 @@ const List = (props) => {
             </View>
             <View style={styles.droite}>
 
-                <Text style={styles.jour}><Text style={styles.date}>{date}</Text> {"\n"}à {heure.substring(0, heure.length - 3)}</Text>
+                <Text style={styles.jour}><Text style={styles.date}>{jours} {mois}</Text> {"\n"}à {heure.substring(0, heure.length - 3)}</Text>
                 <Text style={styles.degre}>{temp}°C</Text>
             </View>
         </View>
