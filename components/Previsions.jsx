@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, Image, View, SafeAreaView, ScrollView, FlatList } from 'react-native';
 
+//Style de la page Prévisions
+
 const styles = StyleSheet.create({
 
     haut: {
@@ -113,10 +115,15 @@ const styles = StyleSheet.create({
 const apiKey = '093c63d1d6dd2f0f77c6f14d91a19042';
 const ville = 'Thiais';
 
+//Fonction Previsions où se trouveront les informations relative à la météo des 5 prochains jours
+
 export default function Previsions({ navigation }) {
 
     const [city, setCity] = useState('');
     const [g, setMeteo] = useState('');
+
+//Appel de l'API météo pour afficher la météo des 5 prochains jours
+
     useEffect(() => {
 
         fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${ville}&appid=${apiKey}&units=metric&lang=fr`)
@@ -126,6 +133,8 @@ export default function Previsions({ navigation }) {
                 setMeteo(jsonData);
             })
     })
+
+//Contenus de la page Prévision
 
     return (
 
@@ -166,6 +175,9 @@ export default function Previsions({ navigation }) {
     );
 }
 
+// Composant List qui affichera la météo à un temps donné et qui se répétera le nombre de fois qu'il faudra
+// On l'appel dans la fonction Previsions
+
 const List = (props) => {
 
     const g = props.item;
@@ -184,10 +196,14 @@ const List = (props) => {
         setTemp(g.main.temp.toFixed(1))
     });
 
+//Affichage de la date sous la forme : "1 Avril"
+
     let jour = new Date(date);
     const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     let mois = months[jour.getUTCMonth()];
     let jours = jour.getUTCDate();
+
+//Contenus du composant List
 
       return (
         <View style={styles.prochainement}>
