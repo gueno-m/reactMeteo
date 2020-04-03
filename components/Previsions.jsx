@@ -122,6 +122,27 @@ export default function Previsions({ navigation }) {
     const [city, setCity] = useState('');
     const [g, setMeteo] = useState('');
 
+//Code pour essayer de faire marcher la géolocalisation (ne marche pas) 
+
+    // state = {
+    //     location: {},
+    //     errorMessage: ''
+    //   };
+    //   function componentWillMount() {
+    //     this._getLocation();
+    //   }
+    
+    //   _getLocation = async() => {
+    //     const {status} = await Permissions.askAsync(Permissions.LOCATION);
+    //     if (status !== 'granted') {
+    //       console.log('Permission non autorisé ! ');
+    //       this.setState({errorMessage: 'Permission'});
+    
+    //     }
+    //     const location = await Location.getCurrentPositionAsync();
+    
+    //     this.setState({location});
+
 //Appel de l'API météo pour afficher la météo des 5 prochains jours
 
     useEffect(() => {
